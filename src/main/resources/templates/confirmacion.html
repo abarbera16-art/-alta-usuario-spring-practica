@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Alta correcta</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body class="oscuro">
+<div class="card">
+    <div class="ok">&#10003;</div>
+    <h1 th:text="'¡Alta correcta, ' + ${nombre} + '!'">¡Alta correcta!</h1>
+
+    <dl>
+        <dt>Email</dt><dd th:text="${email}">email</dd>
+        <dt>Tecnología</dt><dd th:text="${tecnologia}">tecnología</dd>
+        <dt>Nivel</dt>
+        <dd th:unless="${#lists.isEmpty(niveles)}" th:text="${#strings.listJoin(niveles, ', ')}">niveles</dd>
+        <dd th:if="${#lists.isEmpty(niveles)}">(sin indicar)</dd>
+    </dl>
+
+    <a class="volver" th:href="@{/}">&larr; Volver al inicio</a>
+</div>
+</body>
+</html>

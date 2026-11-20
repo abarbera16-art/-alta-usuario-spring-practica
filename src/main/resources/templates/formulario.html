@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de alta</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body class="claro">
+<div class="form-card">
+    <h1>Formulario de alta</h1>
+
+    <!-- Solo se pinta si existe mensajeError -->
+    <div class="error-msg" th:if="${mensajeError != null}" th:text="${mensajeError}">Mensaje de error</div>
+
+    <form th:action="@{/alta}" method="post">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" th:value="${nombre}">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" th:value="${email}" required>
+
+        <label for="tecnologia">Tecnología</label>
+        <select id="tecnologia" name="tecnologia">
+            <option th:each="t : ${tecnologias}"
+                    th:value="${t}"
+                    th:text="${t}"
+                    th:selected="${t == tecnologia}">Tecnología</option>
+        </select>
+
+        <label for="nivel">Nivel (puedes marcar varios)</label>
+        <select id="nivel" name="nivel" multiple>
+            <option th:each="n : ${listaNiveles}"
+                    th:value="${n}"
+                    th:text="${n}"
+                    th:selected="${niveles != null and #lists.contains(niveles, n)}">Nivel</option>
+        </select>
+
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+</body>
+</html>
